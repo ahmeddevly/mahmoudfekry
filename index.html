@@ -707,6 +707,23 @@ const SECTIONS = [
   },
 ];
 
+const allFiles = [];
+SECTIONS.forEach(sec => {
+  if (sec.hasSub && sec.sub) {
+    sec.sub.forEach(sub => {
+      allFiles.push(...sub.files);
+    });
+  } else if (sec.files) {
+    allFiles.push(...sec.files);
+  }
+});
+
+SECTIONS.unshift({
+  id: 'all',
+  label: 'الكل',
+  icon: '📂',
+  files: allFiles
+});
 /* ══════════════════════════════════════════════════════════════
    HAMBURGER / DRAWER LOGIC
 ══════════════════════════════════════════════════════════════ */
